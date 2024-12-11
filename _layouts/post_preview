@@ -1,0 +1,60 @@
+<!-- Post -->
+<div class="blog-item">
+	
+	<!-- Post Title -->
+	<h2 class="blog-item-title font-alt"><a href={{ post.url }}>{{ post.title }}</a></h2>
+	
+	<!-- Author, Categories, Comments -->
+	<div class="blog-item-data">
+		<a href="#"><i class="fa fa-clock-o"></i> {{ post.date | date_to_string }}</a>
+		<span class="separator">&nbsp;</span>
+		<a href="#"><i class="fa fa-user"></i> {{ post.author }}</a>
+		<span class="separator">&nbsp;</span>
+    {%- if post.tags -%}
+  		<i class="fa fa-folder-open"></i>
+        {% for post in post.tags %}
+  			  <a href="#{{ post.tag }}">{{ post.tag }}</a> &nbsp;
+  			{% endfor %}
+  		<span class="separator">&nbsp;</span>
+    {%- endif -%}
+		<a href="#"><i class="fa fa-comments"></i> 0 Comments</a> <!-- TODO: Comments -->
+	</div>
+ 
+  {%- if post.preview_video -%}
+  <!-- Media Gallery -->
+  <div class="blog-media">
+    <iframe width="640" height="360" src="{{ post.preview_video }}" frameborder="0" allowfullscreen></iframe>
+  </div>
+  {%- endif -%}
+
+  {%- if post.preview_pictures -%}
+    {%- if post.preview_pictures.size == 1 -%}
+      <!-- Image -->
+      <div class="blog-media">
+        <a href="blog-single-sidebar-right.html"><img src="preview_pictures[0]" alt="" /></a>
+      </div>
+    {% else %}
+      <!-- Media Gallery -->
+      <div class="blog-media">
+        <ul class="clearlist content-slider">
+          {% for picture in post.preview_pictures %}
+          <li>
+            <img src="{{ post.preview_picture }}" alt="" />
+          </li>
+      </ul>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+	
+	<!-- Text Intro -->
+	<div class="blog-item-body">
+		{{ post.excerpt }}
+	</div>
+	
+	<!-- Read More Link -->
+	<div class="blog-item-foot">
+		<a href="{{ post.url }}" class="btn btn-mod btn-round  btn-small">Read More <i class="fa fa-angle-right"></i></a>
+	</div>
+	
+</div>
+<!-- End Post -->
